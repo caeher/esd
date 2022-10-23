@@ -1,6 +1,6 @@
 /*Estructura Reservacion*/
 
-struct nodo{
+typedef struct nodo{
 	
-};
+}Reservacion;
 
