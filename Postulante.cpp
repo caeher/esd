@@ -3,12 +3,13 @@
 
 
 	typedef struct 
+
 	{
-	char nombre[50];
- 	char apellidos[50];
+	char nombrePost[50];
+ 	char apellidosPost[50];
  	char direccion[50];
  	char genero[10];
  	int edad;
- 	
- 	}Persona;
- 
+ 	char gmail[50];
+ 	char telefono[10];
+ 	}Postulante;
