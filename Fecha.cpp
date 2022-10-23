@@ -14,13 +14,16 @@ Fecha pedirFecha() {
 }
 
 bool validMes(int mes) {
-    return false;
+    return mes >0 && mes <=12;
 }
 
-bool validDia(int dia) {
-    return false;
+bool validDia(Fecha fecha) {
+    if(isBisiestro(fecha.year)) 
+        return fecha.dia > 0 && fecha.dia <= 28;
+    else 
+        return fecha.dia > 0 && fecha.dia <= 31;
 }
 
 bool validYear(int year) {
-    return false;
+    return year > 2000;
 }
