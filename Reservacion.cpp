@@ -1,0 +1,6 @@
+/*Estructura Reservacion*/
+
+struct nodo{
+	
+};
+
