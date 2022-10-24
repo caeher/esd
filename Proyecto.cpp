@@ -2,14 +2,19 @@
 
 // #include "./Functions.cpp"
 
+#include "./Fecha.cpp"
 
 using namespace std;
 
 
 
 int main () {
+    
 
- hola mundo	
+    
+    Fecha nuevaFecha = pedirFecha();
+
+    mostrarFecha(nuevaFecha);
 
     return 0;
 }
