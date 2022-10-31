@@ -1,0 +1,40 @@
+#include <string>
+
+void limpiarPantalla() {
+	system("cls");
+}
+
+void menu (std::string *menu, std::string title, int size) {
+    std::cout << "*******************" << title << "*******************" << std::endl;
+    for(int i = 0; i < size; i++) {
+        std::cout << (i + 1) << ". " << menu[i] << std::endl;
+    }
+}
+bool validarCadena(std::string cadena) {
+	return cadena != "";
+}
+std::string pedirCadena() {
+	std::string cadena = "";
+	bool flag = true;
+	while(flag) {
+		std::cout << std::endl << "Escriba aqui: " ;
+		getline(std::cin, cadena);
+		if(cadena.length() > 0) 
+			flag = false;
+		else 
+			std::cout << std::endl << "No debe ingresar un texto vacia" << std::endl;
+	}
+	return cadena;
+}
+
+float convertirFlotante (std::string cadena) {
+	float num = 0.0;
+	sscanf(cadena.c_str(), "%f", &num);
+	return num;
+}
+
+float convertirEntero(std::string cadena) {
+	int num = 0;
+	sscanf(cadena.c_str(), "%d", &num);
+	return num;
+}

@@ -1,6 +1,8 @@
 /*Estructura Reservacion*/
+#include <iostream>
 using namespace std;
 /*
+
 typedef struct{
 	//atributos de la estructura
 	OfertaLaboral ofertaLab;
@@ -15,3 +17,4 @@ void mostrar(){
 	cout<<"hola mundo"<<endl;
 }
 */
+
