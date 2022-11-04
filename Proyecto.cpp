@@ -2,12 +2,16 @@
 #include <iostream>
 
 #include "./Functions.cpp"
+#include "./Fecha.cpp"
 #include "./Persona.cpp"
 #include "./Postulante.cpp"
+#include "./OfertaLaboral.cpp"
 #include "./Reservacion.cpp"
-#include "./Fecha.cpp"
 #include "./login.cpp"
 #include <string.h>
+
+// Estructuras colas, pilas, listas, arbol
+//#include "./ColaPersona.cpp"
 
 using namespace std;
 
@@ -16,6 +20,9 @@ using namespace std;
 int main () {
 	bool flag = true;
 	string aux;
+//	Fecha fecha1 = pedirFecha();
+//	mostrarFecha(fecha1);
+//	system("pause");
 	int opcion = 0, subopcion = 0;
     string menuItem[] = {
         "Ingresar postulante",
@@ -35,21 +42,19 @@ int main () {
     int menuMostrarDatosSize = sizeof(menuMostrarDatos)/sizeof(menuMostrarDatos[0]);
 
     // Estructura cola que almacena postulantes
+//    ColaPersona personas;
     Postulante postulantes[10];
     int postu = 0;
+    
+    OfertaLaboral ofertas[10];
+    int ofer = 0;
+
     // Estructura lista que almacena ofertas laborales
     
-
-    
     //Validamos que si se logro iniciar sesion
-//    if(login()){
-    
-//	Fecha nuevaFecha = pedirFecha();
+   if(login()){
 
-//    mostrarFecha(nuevaFecha);
-//	}
-
-	
+        
     while(flag) {
         limpiarPantalla();
     	menu(menuItem, "RECURSOS HUMANOS", menuSize);
@@ -60,9 +65,10 @@ int main () {
             if(opcion == 1) {
                 postulantes[postu] = pedirPostulante();
                 postu++;
-            }
-
-            if(opcion == 3) {
+            }else if(opcion == 2) {
+				ofertas[ofer] = pedirOfertaLaboral();
+				ofer++;
+			}else if(opcion == 3) {
                 limpiarPantalla();
                 menu(menuMostrarDatos, "MOSTRAR DATOS", menuMostrarDatosSize);
                 cout << "Ingrese una opcion: " ;
@@ -76,15 +82,24 @@ int main () {
                     }
                     
                 }
-            }
+                if(opcion == 2) {
+                	for(int i = 0; i < ofer; i++) {
+                		mostrarOfertaLaboral(ofertas[i]);
+                		system("PAUSE");
+					}
+				}
+                
+            }else if(opcion == 5) {
+            	flag = false;
+			}
         }else {
             cout << endl << "Debe ingresar una opcion valida" << endl;
 
         }
     	
 	}
-
-    
+	
+	}
     
 
     return 0;

@@ -1,20 +1,31 @@
-/*Estructura Reservacion*/
-#include <iostream>
-using namespace std;
-/*
+#include <string>
 
-typedef struct{
-	//atributos de la estructura
-	OfertaLaboral ofertaLab;
-	Postulante postulante;
+int contadorId = 0;
+
+typedef struct {
+	int codigo;
+	OfertaLaboral ofertaLaboral;
 	Fecha fecha;
+	Postulante postulante;
 	bool esContratado;
-}Reservacion;
+} Reservacion;
 
 
-void mostrar(){
+Reservacion generarReservacion(OfertaLaboral oferta, Postulante postulante, Fecha fecha) {
 	
-	cout<<"hola mundo"<<endl;
-}
-*/
+	Reservacion nuevaReservacion;
+	nuevaReservacion.codigo = ++contadorId;
+	nuevaReservacion.ofertaLaboral = oferta;
+	nuevaReservacion.postulante = postulante;
+	nuevaReservacion.fecha = fecha;
+	nuevaReservacion.esContratado = false;
 
+	return nuevaReservacion;
+}
+
+void mostrarReservacion(Reservacion reservacion) {
+	std::cout << std::endl << "Identificador: " << reservacion.codigo << std::endl;
+	mostrarOfertaLaboral(reservacion.ofertaLaboral);
+	mostrarFecha(reservacion.fecha);
+	mostrarPostulante(reservacion.postulante);
+}
