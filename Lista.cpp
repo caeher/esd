@@ -1,3 +1,4 @@
+#include <typeinfo>
 template<typename T>
 struct Lista {
     T dato;
@@ -67,6 +68,7 @@ T getLista(Lista<T> *&lista, T dato) {
     T resultado;
     Lista<T> *aux = lista;
     while(lista != NULL) {
+        
         if(lista->dato == dato) {
             resultado = lista->dato;
         }

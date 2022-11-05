@@ -2,14 +2,17 @@
 // #include "./Fecha.cpp"
 #include <string.h>
 int contadorIdOferta = 0;
-typedef struct {
+struct OfertaLaboral{
     int codigo;
     float  salarioBase;
     Fecha fechaPublicada;
     Fecha fechaInicio;
     std::string vacante;
     std::string ocupacion;
-} OfertaLaboral;
+    bool operator==(const OfertaLaboral &item) const{
+        return codigo == item.codigo;
+    }
+} ;
 
 void mostrarOfertaLaboral(OfertaLaboral oferta) {
     std::cout << std::endl << "OFERTA LABORAL " << oferta.codigo << std::endl;

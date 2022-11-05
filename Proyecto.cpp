@@ -19,7 +19,18 @@
 
 using namespace std;
 
+// Prototipos
+template <typename T>
+void ingresarPostulante(Lista<T> *&);
+template <typename T>
+void ingresarOfertaLaboral(Lista<T> *&);
+template <typename T>
+void asociarPostulanteOferta(Cola<T> *, Lista<T>, Lista<T>);
 
+template <typename T>
+void recorrerPostulantes(Lista<T> *&);
+template  <typename T>
+void recorrerOfertas(Lista<T> *&);
 
 int main () {
 	bool flag = true;
@@ -31,8 +42,9 @@ int main () {
     string menuItem[] = {
         "Ingresar postulante",
         "Ingresar oferta laboral",
-        "Mostrar datos",
+        "Asociar postulante con oferta laboral",
         "Entrevistar",
+        "Mostrar datos",
         "Salir"
     };
     string menuMostrarDatos[] = {
@@ -46,131 +58,98 @@ int main () {
     int menuMostrarDatosSize = sizeof(menuMostrarDatos)/sizeof(menuMostrarDatos[0]);
 
     // Estructura cola que almacena postulantes
-//    ColaPersona personas;
-    Postulante postulantes[10];
-    int postu = 0;
-    
-    OfertaLaboral ofertas[10];
-    int ofer = 0;
+    Lista<Postulante> *postulantes = NULL;
+    Lista<OfertaLaboral> *ofertasLaborales = NULL;
 
-
-    // Ejemplo de como usar la cola
-    cout << endl << "EJEMPLO PILA" << endl;
-   Pila<char> * pilaChar;
-   pushStack(pilaChar, 'a');
-   pushStack(pilaChar,'b');
-   cout << popStack(pilaChar);
-   cout << endl << popStack(pilaChar);
-   
-    	
-    cout << endl << "EJEMPLO COLA" << endl;
-    Cola<char> * primero = NULL;
-    Cola<char> * ultimo = NULL;
-    
-    pushCola(&primero, &ultimo, 'a');
-	pushCola(&primero, &ultimo, 'b');
-	pushCola(&primero, &ultimo, 'c');
-	pushCola(&primero, &ultimo, 'd');
-	
-	char q;
-	
-	q = popCola(&primero, &ultimo);
-	cout << q ;
-    q = popCola(&primero, &ultimo);
-	cout << endl << q ;
-	q = popCola(&primero, &ultimo);
-	cout << endl << q ;
-	q = popCola(&primero, &ultimo);
-	cout << endl << q ;
-
-    cout << endl << "EJEMPLO DE LISTAS" ;
-    Lista<char> * lista = NULL;
-    pushLista(lista, 'a');
-    pushLista(lista, 'b');
-    pushLista(lista, 'c');
-    pushLista(lista, 'd');
-    pushLista(lista, 'e');
-    pushLista(lista, 'f');
-
-    if(isLista(lista, 'a')) {
-        cout << endl << "a Esta en la lista" ;
-    }else {
-    	cout << endl << "z no esta en la lista";
-	}
-	
-	if(isLista(lista, 'z')) {
-        cout << endl << "e Esta en la lista";
-    }else {
-    	cout << endl << "z no esta en la lista";
-	}
-	
-	deleteLista(lista, 'a');
-	
-	if(isLista(lista, 'a')) {
-        cout << endl << "a Esta en la lista" ;
-    }else {
-    	cout << endl << "a ya no esta en la lista";
-	}
-	
-	if(isLista(lista, 'e')) {
-        cout << endl << "e Esta en la lista";
-    }else {
-    	cout << endl << "e no esta en la lista";
-	}
-	
-	cout << endl << "Imprimir e: " << getLista(lista, 'e');
     // Estructura lista que almacena ofertas laborales
-    
-    //Validamos que si se logro iniciar sesion
-//    if(login()){
-
+   
         
-//     while(flag) {
-//         limpiarPantalla();
-//     	menu(menuItem, "RECURSOS HUMANOS", menuSize);
-//         cout << "Ingrese una opcion: " ;
-//         aux = pedirCadena();
-//         opcion = convertirEntero(aux);
-//         if(opcion > 0) {    
-//             if(opcion == 1) {
-//                 postulantes[postu] = pedirPostulante();
-//                 postu++;
-//             }else if(opcion == 2) {
-// 				ofertas[ofer] = pedirOfertaLaboral();
-// 				ofer++;
-// 			}else if(opcion == 3) {
-//                 limpiarPantalla();
-//                 menu(menuMostrarDatos, "MOSTRAR DATOS", menuMostrarDatosSize);
-//                 cout << "Ingrese una opcion: " ;
-//                 aux = pedirCadena();
-//                 opcion = convertirEntero(aux);
-//                 if(opcion == 1) {
-//                     for (int i = 0; i < postu; i++)
-//                     {
-//                        mostrarPostulante(postulantes[i]); 
-//                        system("PAUSE");
-//                     }
-                    
-//                 }
-//                 if(opcion == 2) {
-//                 	for(int i = 0; i < ofer; i++) {
-//                 		mostrarOfertaLaboral(ofertas[i]);
-//                 		system("PAUSE");
-// 					}
-// 				}
+    while(flag) {
+        limpiarPantalla();
+    	menu(menuItem, "RECURSOS HUMANOS", menuSize);
+        cout << "Ingrese una opcion: " ;
+        aux = pedirCadena();
+        opcion = convertirEntero(aux);
+        if(opcion > 0) {    
+            if(opcion == 1) {
+                ingresarPostulante(postulantes);
+            }else if(opcion == 2) {
+				ingresarOfertaLaboral(ofertasLaborales);
+			}else if(opcion == 3) {
                 
-//             }else if(opcion == 5) {
-//             	flag = false;
-// 			}
-//         }else {
-//             cout << endl << "Debe ingresar una opcion valida" << endl;
+                
+            }else if(opcion == 5) {
+            	limpiarPantalla();
+                menu(menuMostrarDatos, "MOSTRAR DATOS", menuMostrarDatosSize);
+                cout << "Ingrese una opcion: " ;
+                aux = pedirCadena();
+                opcion = convertirEntero(aux);
+                if(opcion == 1) {
+                    recorrerPostulantes(postulantes);
+                    system("PAUSE");
+                }
+                if(opcion == 2) {
+                    recorrerOfertas(ofertasLaborales);
+                    system("PAUSE");
+				}
+			} else if (opcion == 6) {
+				flag = false;
+			} else if(opcion == 7) {
+				
+               
+                system("PAUSE");
+            }
+        }else {
+            cout << endl << "Debe ingresar una opcion valida" << endl;
 
-//         }
+        }
     	
-// 	}
+	}
 	
 // 	}
     
 
     return 0;
+}
+
+
+template <typename T>
+void ingresarPostulante(Lista<T> *&lista) {
+    Postulante nuevo ;
+    nuevo = pedirPostulante();
+    pushLista(lista, nuevo);
+    cout << endl << "Se inserto el postulante correctamente" << endl;
+    system("PAUSE");
+}
+
+template <typename T>
+void recorrerPostulantes(Lista<T> *&lista) {
+    Lista<T> *aux = lista;
+    cout << endl << "-------------------------------------" << endl;
+    while(lista != NULL) {
+        mostrarPostulante(lista->dato);
+        lista = lista->siguiente;
+        cout << endl << "-------------------------------------" << endl;
+    }
+    lista = aux;
+}
+
+template <typename T>
+void ingresarOfertaLaboral(Lista<T> *& lista) {
+    OfertaLaboral nuevo;
+    nuevo = pedirOfertaLaboral();
+    pushLista(lista, nuevo);
+    cout << endl << "Se inserto la oferta laboral correctamente" << endl;
+    system("PAUSE");
+}
+template <typename T>
+void recorrerOfertas(Lista<T> *& lista) {
+    Lista<T> *aux = lista;
+    cout << endl << "-------------------------------------" << endl;
+    while(lista != NULL) {
+        mostrarOfertaLaboral(lista->dato);
+        lista = lista->siguiente;
+        cout << endl << "-------------------------------------" << endl;
+    }
+    lista = aux;
 }

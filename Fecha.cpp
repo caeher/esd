@@ -1,10 +1,13 @@
 #include <string> 
 
-typedef struct {
+struct Fecha{
     int dia;
     int mes;
     int year;
-} Fecha;
+    bool operator==(const Fecha &item) {
+        return (dia == item.dia && mes == item.mes && year == item.year);
+    }
+};
 /** 
  * Funcion que permite comprobar si un año en especifico es bisiestro
  * @return bool

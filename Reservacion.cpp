@@ -2,13 +2,16 @@
 
 int contadorId = 0;
 
-typedef struct {
+struct Reservacion{
 	int codigo;
 	OfertaLaboral ofertaLaboral;
 	Fecha fecha;
 	Postulante postulante;
 	bool esContratado;
-} Reservacion;
+	bool operator==(const Reservacion& item) const{
+		return codigo == item.codigo;
+	}
+} ;
 
 
 Reservacion generarReservacion(OfertaLaboral oferta, Postulante postulante, Fecha fecha) {
