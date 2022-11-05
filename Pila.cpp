@@ -3,7 +3,8 @@
  *  Crear una variable puntero especificando el tipo de datos que se va a procesar
  *  Pila<TYPOAQUI> * pilaTipo;
  * 	Para insertar datos
- *	pushStack(pilaTipo, TYPOAQUI);
+ *	pushStack(pilaTipo, DATO_DE_TYPOAQUI);
+ *  Para Eliminar datos
  * 	TYPOAQUI dato = pop(pilaTipo);
  * 
  * */

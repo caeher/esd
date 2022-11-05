@@ -9,6 +9,7 @@
 #include "./Reservacion.cpp"
 #include "./login.cpp"
 #include "./Pila.cpp"
+#include "./Cola.cpp"
 #include <string.h>
 
 
@@ -52,13 +53,34 @@ int main () {
     int ofer = 0;
 
 
-	// Ejemplo de como usar la cola
-    Pila<char> * pilaChar;
-    pushStack(pilaChar, 'a');
-    pushStack(pilaChar,'b');
-    cout << endl << popStack(pilaChar);
-    cout << endl << popStack(pilaChar);
+    // Ejemplo de como usar la cola
+    cout << endl << "EJEMPLO PILA" << endl;
+   Pila<char> * pilaChar;
+   pushStack(pilaChar, 'a');
+   pushStack(pilaChar,'b');
+   cout << popStack(pilaChar);
+   cout << endl << popStack(pilaChar);
+   
+    	
+    cout << endl << "EJEMPLO COLA" << endl;
+    Cola<char> * primero = NULL;
+    Cola<char> * ultimo = NULL;
     
+    pushCola(&primero, &ultimo, 'a');
+	pushCola(&primero, &ultimo, 'b');
+	pushCola(&primero, &ultimo, 'c');
+	pushCola(&primero, &ultimo, 'd');
+	
+	char q;
+	
+	q = popCola(&primero, &ultimo);
+	cout << q ;
+    q = popCola(&primero, &ultimo);
+	cout << endl << q ;
+	q = popCola(&primero, &ultimo);
+	cout << endl << q ;
+	q = popCola(&primero, &ultimo);
+	cout << endl << q ;
 //    char a = pop(pilaChar);
 //    cout << endl << endl << pop(pilaChar) << endl<< pop(pilaChar);
 //    cout << endl << a;
