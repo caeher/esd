@@ -10,6 +10,7 @@
 #include "./login.cpp"
 #include "./Pila.cpp"
 #include "./Cola.cpp"
+#include "./Lista.cpp"
 #include <string.h>
 
 
@@ -81,15 +82,43 @@ int main () {
 	cout << endl << q ;
 	q = popCola(&primero, &ultimo);
 	cout << endl << q ;
-//    char a = pop(pilaChar);
-//    cout << endl << endl << pop(pilaChar) << endl<< pop(pilaChar);
-//    cout << endl << a;
-//    a = pop(pilaChar);
-//    cout << endl << a;
-    
 
-//    cout << endl << nuevaPila.dato << endl;
+    cout << endl << "EJEMPLO DE LISTAS" ;
+    Lista<char> * lista = NULL;
+    pushLista(lista, 'a');
+    pushLista(lista, 'b');
+    pushLista(lista, 'c');
+    pushLista(lista, 'd');
+    pushLista(lista, 'e');
+    pushLista(lista, 'f');
 
+    if(isLista(lista, 'a')) {
+        cout << endl << "a Esta en la lista" ;
+    }else {
+    	cout << endl << "z no esta en la lista";
+	}
+	
+	if(isLista(lista, 'z')) {
+        cout << endl << "e Esta en la lista";
+    }else {
+    	cout << endl << "z no esta en la lista";
+	}
+	
+	deleteLista(lista, 'a');
+	
+	if(isLista(lista, 'a')) {
+        cout << endl << "a Esta en la lista" ;
+    }else {
+    	cout << endl << "a ya no esta en la lista";
+	}
+	
+	if(isLista(lista, 'e')) {
+        cout << endl << "e Esta en la lista";
+    }else {
+    	cout << endl << "e no esta en la lista";
+	}
+	
+	cout << endl << "Imprimir e: " << getLista(lista, 'e');
     // Estructura lista que almacena ofertas laborales
     
     //Validamos que si se logro iniciar sesion
