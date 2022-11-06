@@ -6,7 +6,7 @@ struct Fecha{
     int year;
     bool operator==(const Fecha &item) {
         return (dia == item.dia && mes == item.mes && year == item.year);
-    }
+    };
 };
 /** 
  * Funcion que permite comprobar si un año en especifico es bisiestro

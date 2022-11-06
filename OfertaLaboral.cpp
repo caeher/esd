@@ -11,7 +11,7 @@ struct OfertaLaboral{
     std::string ocupacion;
     bool operator==(const OfertaLaboral &item) const{
         return codigo == item.codigo;
-    }
+    };
 } ;
 
 void mostrarOfertaLaboral(OfertaLaboral oferta) {
@@ -58,3 +58,14 @@ OfertaLaboral pedirOfertaLaboral() {
     return nuevaOferta;
 }
 
+
+void mostrarOfertaInline(OfertaLaboral oferta) {
+    std::cout << std::endl << "Codigo: " << oferta.codigo ;
+    std::cout << " -- Salario base: " << oferta.salarioBase ;
+    std::cout << " -- Fecha publicada: ";
+    mostrarFecha(oferta.fechaPublicada);
+    std::cout << " -- Fecha publicada: ";
+    mostrarFecha(oferta.fechaPublicada);
+    std::cout << " -- Vacantes: " << oferta.vacante;
+    std::cout << " -- Ocupacion: " << oferta.ocupacion;
+}

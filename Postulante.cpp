@@ -6,7 +6,10 @@ struct Postulante{
 	int codigoOferta;
 	bool operator==(const Postulante &item) const {
 		return codigo == item.codigo;
-	}
+	};
+	// bool operator==(const int &item) const {
+	// 	return codigo == item;
+	// };
 };
 
 
@@ -32,4 +35,19 @@ Postulante generarPostulante(Persona persona) {
 	nuevoPostulante.persona = persona;
 	nuevoPostulante.codigoOferta = 0;
 	return nuevoPostulante;
+}
+
+void mostrarPostulanteInline(Postulante postulante) {
+	std::cout << std::endl << "Codigo: " << postulante.codigo << " -- ";
+	std::cout << "Nombre: " << postulante.persona.nombres << " " << postulante.persona.apellidos;
+	std::cout << " -- Direccion: " << postulante.persona.direccion;
+	std::cout << " -- Genero: " <<  postulante.persona.genero << " -- Edad: " << postulante.persona.edad;
+}
+
+bool comparePostulante(Postulante p1, Postulante p2) {
+	return p1.codigo == p2.codigo;
+}
+
+bool compareCodigo(Postulante p, int codigo) {
+	return p.codigo == codigo;
 }
