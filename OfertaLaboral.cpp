@@ -1,5 +1,4 @@
-////#include <string>
-// #include "./Fecha.cpp"
+
 #include <string.h>
 int contadorIdOferta = 0;
 struct OfertaLaboral{
@@ -14,6 +13,7 @@ struct OfertaLaboral{
     };
 } ;
 
+/** Muestra los datos contenidos en la estructura*/
 void mostrarOfertaLaboral(OfertaLaboral oferta) {
     std::cout << std::endl << "OFERTA LABORAL " << oferta.codigo << std::endl;
     std::cout << "Salario base: " << oferta.salarioBase << std::endl;
@@ -26,7 +26,9 @@ void mostrarOfertaLaboral(OfertaLaboral oferta) {
     std::cout << std::endl << "Ocupacion: " << oferta.ocupacion;
     std::cout << std::endl;
 }
-
+/**
+ * Se encarga de crear una nueva estructura OfertaLaboral
+*/
 OfertaLaboral pedirOfertaLaboral() {
     OfertaLaboral nuevaOferta;
     bool flag = true;
@@ -58,7 +60,9 @@ OfertaLaboral pedirOfertaLaboral() {
     return nuevaOferta;
 }
 
-
+/**
+ * Muestra los datos de una estructura en una sola linea
+*/
 void mostrarOfertaInline(OfertaLaboral oferta) {
     std::cout << std::endl << "Codigo: " << oferta.codigo ;
     std::cout << " -- Salario base: " << oferta.salarioBase ;

@@ -68,7 +68,9 @@ int main () {
     // Variables auxiliares
     Reservacion auxReservacion;
     int auxReservacionOpcion = 0;
-        
+    
+    if(login()){
+
     while(flag) {
         limpiarPantalla();
     	menu(menuItem, "RECURSOS HUMANOS", menuSize);
@@ -97,7 +99,7 @@ int main () {
                     }
                     if(opcionEntrevista == 1) {
                         auxReservacion = popCola(&primeraReservacion, &ultimaReservacion);
-                        if(!(auxReservacion.postulante.codigo <= 0 || auxReservacion.ofertaLaboral.codigo <=0)) {
+                        if(!(auxReservacion.postulante.codigo <= 0 || auxReservacion.postulante.codigo >= 10000 || auxReservacion.ofertaLaboral.codigo <=0 || auxReservacion.ofertaLaboral.codigo >= 10000 )) {
                             cout << endl << "Entrevistando a" << endl;
                             mostrarPostulante(auxReservacion.postulante);
                             cout << endl << "Para la oferta laboral" << endl;
@@ -169,13 +171,15 @@ int main () {
     	
 	}
 	
-// 	}
+	}
     
 
     return 0;
 }
 
-
+/**
+ * Funcion que pide un nuevo postulante y lo inserta en una lista
+*/
 template <typename T>
 void ingresarPostulante(Lista<T> *&lista) {
     Postulante nuevo ;
@@ -186,7 +190,9 @@ void ingresarPostulante(Lista<T> *&lista) {
     cout << endl << "Se inserto el postulante correctamente" << endl;
     system("PAUSE");
 }
-
+/**
+ * Funcion que recorre todos los postulantes existentes en una lista
+*/
 template <typename T>
 void recorrerPostulantes(Lista<T> *&lista) {
     Lista<T> *aux = lista;
@@ -199,6 +205,9 @@ void recorrerPostulantes(Lista<T> *&lista) {
     lista = aux;
 }
 
+/**
+ * Funcion que pide una oferta laboral y la guarda en una lista
+*/
 template <typename T>
 void ingresarOfertaLaboral(Lista<T> *& lista) {
     OfertaLaboral nuevo;
@@ -207,6 +216,9 @@ void ingresarOfertaLaboral(Lista<T> *& lista) {
     cout << endl << "Se inserto la oferta laboral correctamente" << endl;
     system("PAUSE");
 }
+/**
+ * Funcion que recorre las ofertas laborales existentes
+*/
 template <typename T>
 void recorrerOfertas(Lista<T> *& lista) {
     Lista<T> *aux = lista;
@@ -218,6 +230,9 @@ void recorrerOfertas(Lista<T> *& lista) {
     cout << endl;
     lista = aux;
 }
+/**
+ * La siguiente funcion se encarga de asociar a un postulate con una oferta laboral
+*/
 template<typename T, typename A, typename B>
 void asociarPostulanteOferta(Cola<T> *& primero, Cola<T> *& ultimo, Lista<A> *&postulantes, Lista<B> *&ofertas) {
     Reservacion nuevo;
@@ -231,7 +246,7 @@ void asociarPostulanteOferta(Cola<T> *& primero, Cola<T> *& ultimo, Lista<A> *&p
     string cad = "";
     
     mostrarPostulanteOferta(postulantes, ofertas);
-
+    /* El siguiente bloque de codigo toma un codigo de postulante exitente para la reservacion*/
     while(flag) {
         cout << endl << "Ingrese el codigo del postulante: ";
         cad = pedirCadena();
@@ -256,6 +271,8 @@ void asociarPostulanteOferta(Cola<T> *& primero, Cola<T> *& ultimo, Lista<A> *&p
     }
 
     flag = true;
+
+    /* El siguiente bloque de codigo toma el codigo existente de una oferta laboral para la reservacion*/
     while(flag) {
         cout << endl << "Ingrese el codigo de la Oferta: ";
         cad = pedirCadena();
@@ -275,23 +292,25 @@ void asociarPostulanteOferta(Cola<T> *& primero, Cola<T> *& ultimo, Lista<A> *&p
             }
             if(flag) {
                 cout << endl << "El codigo que selecciono no existe en las ofertas";
-            }
-            
+            }    
         }
     }
-
+    /* En caso de que no exista un postulante o una oferta no se crea la reservacion */
     if(!(aux1 == NULL && aux2 == NULL)) {
     	fecha = pedirFecha();
 	    nuevo = generarReservacion(dato2, dato1, fecha);
 	    pushCola(&primero, &ultimo, nuevo);
 	    postulantes = aux1;
     	ofertas = aux2;
-
 	}
     
     system("PAUSE");
 }
 
+/**
+ * La siguiente funcion se encarca de mostrar los datos de los postulantes y las
+ * ofertas laborales en una sola linea.
+*/
 template<typename A, typename B>
 void mostrarPostulanteOferta(Lista<A> *& postulantes, Lista<B> *& ofertas) {
 	Lista<A> *aux1 = postulantes;
@@ -311,6 +330,9 @@ void mostrarPostulanteOferta(Lista<A> *& postulantes, Lista<B> *& ofertas) {
     ofertas = aux2;
 }
 
+/**
+ * La siguiente funcion permite mostrar los datos de los entrevistados
+ * */
 template <typename T>
 void mostrarEntrevistados(Pila<T> *&datos) {
     Reservacion r;
@@ -328,6 +350,5 @@ void mostrarEntrevistados(Pila<T> *&datos) {
         mostrarOfertaLaboral(r.ofertaLaboral);
         datos = datos->siguiente;
     }
-
     datos = aux;
 }

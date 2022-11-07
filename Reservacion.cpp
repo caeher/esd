@@ -13,7 +13,9 @@ struct Reservacion{
 	}
 } ;
 
-
+/**
+ * Genera una revervación nueva
+*/
 Reservacion generarReservacion(OfertaLaboral oferta, Postulante postulante, Fecha fecha) {
 	
 	Reservacion nuevaReservacion;
@@ -25,7 +27,9 @@ Reservacion generarReservacion(OfertaLaboral oferta, Postulante postulante, Fech
 
 	return nuevaReservacion;
 }
-
+/**
+ * Muestra los datos de una reservación
+*/
 void mostrarReservacion(Reservacion reservacion) {
 	std::cout << std::endl << "Identificador: " << reservacion.codigo << std::endl;
 	mostrarOfertaLaboral(reservacion.ofertaLaboral);

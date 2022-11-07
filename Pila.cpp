@@ -16,7 +16,9 @@ struct Pila{
     Pila<T> *siguiente;
 };
 
-
+/**
+ * Se crea un nuevo nodo
+*/
 template<typename T>
 Pila<T> * crearNodoStack(T dato) {
 	Pila<T> *nuevoNodo = new Pila<T>;
@@ -24,13 +26,18 @@ Pila<T> * crearNodoStack(T dato) {
 	return nuevoNodo;
 }
 
+/**
+ * Función que permite insertar un nuevo dato a la pila
+*/
 template<typename T>
 void pushStack(Pila<T> *&pila, T dato) {
     Pila<T> *nuevo  = crearNodoStack(dato);
     nuevo->siguiente = pila;
     pila = nuevo;
 }
-
+/**
+ * Función que borra un dato de la pila y devuelve el dato eliminado
+*/
 template<typename T>
 T popStack(Pila<T> *&pila) {
     T dato;

@@ -10,11 +10,15 @@ typedef struct
 
 } Persona;
 
-
+/**
+ * Se encarga de validar que sea masculino (M) o femenino (F)
+*/
 bool validarGenero (std::string genero) {
 	return genero == "M" || genero == "F";
 }
-
+/**
+ * Se encarga de pedir los datos de una persona
+*/
 Persona pedirPersona() {
 	std::string aux;
 	bool flag = true;

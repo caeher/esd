@@ -4,7 +4,9 @@ struct Lista {
     T dato;
     Lista *siguiente;
 };
-
+/**
+ * Se encarga de insertar un nuevo elemento a la lista
+*/
 template<typename T>
 void pushLista(Lista<T> *&lista, T dato) {
     Lista<T> *nueva = new Lista<T>();
@@ -25,6 +27,9 @@ void pushLista(Lista<T> *&lista, T dato) {
     nueva->siguiente = temp1;
 }
 
+/**
+ * Se encarga de borrar un elemento de la lista
+*/
 template <typename T>
 void deleteLista(Lista<T> *&lista, T dato) {
     if(lista != NULL) {
@@ -49,7 +54,9 @@ void deleteLista(Lista<T> *&lista, T dato) {
     }
 }
 
-
+/**
+ * Verifica que exista el elemento especificado en la lista
+*/
 template <typename T>
 bool isLista(Lista<T> *&lista, T dato) {
     bool isIn = false;
@@ -62,7 +69,9 @@ bool isLista(Lista<T> *&lista, T dato) {
     lista = aux;
     return isIn;
 }
-
+/**
+ * Obtiene un dato de la lista especificado
+*/
 template <typename T>
 T getLista(Lista<T> *&lista, T dato) {
     T resultado;
