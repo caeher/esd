@@ -25,7 +25,7 @@ void ingresarPostulante(Lista<T> *&);
 template <typename T>
 void ingresarOfertaLaboral(Lista<T> *&);
 template <typename T, typename A, typename B>
-void asociarPostulanteOferta(Cola<T> *, Cola<T> *, Lista<A> *&, Lista<B> *&);
+void asociarPostulanteOferta(Cola<T> *&, Cola<T> *&, Lista<A> *&, Lista<B> *&);
 
 template <typename T>
 void recorrerPostulantes(Lista<T> *&);
@@ -33,7 +33,8 @@ template  <typename T>
 void recorrerOfertas(Lista<T> *&);
 template<typename A, typename B>
 void mostrarPostulanteOferta(Lista<A> *&, Lista<B> *&);
-
+template <typename T>
+void mostrarEntrevistados(Pila<T> *&);
 int main () {
 	bool flag = true, entrevistaFlag;
 	string aux;
@@ -52,7 +53,7 @@ int main () {
     string menuMostrarDatos[] = {
         "Mostrar postulantes",
         "Mostrar oferta laborales",
-        "Mostrar estadisticas",
+        "Mostrar entrevistados",
         "Salir"
     };
     
@@ -85,6 +86,7 @@ int main () {
 			}else if(opcion == 3) {
                 asociarPostulanteOferta(primeraReservacion, ultimaReservacion, postulantes, ofertasLaborales);
             }else if(opcion == 4) {
+            	entrevistaFlag = true;
                 while(entrevistaFlag) {
                     entrevistaFlag = true;
                     limpiarPantalla();
@@ -92,43 +94,75 @@ int main () {
                     cout << endl << "Desea entrevistar?" << endl;
                     cout << "1. SI" << endl << "2. No" ;
                     aux = pedirCadena();
-                    opcionEntrevista = convertirEnter(aux);
+                    opcionEntrevista = convertirEntero(aux);
                     if(opcionEntrevista == 2) {
                         entrevistaFlag = false;
                     }
                     if(opcionEntrevista == 1) {
                         auxReservacion = popCola(&primeraReservacion, &ultimaReservacion);
-                        cout << endl << "Entrevistando a" << endl;
-                        mostrarPostulante(auxReservacion.postulante);
-                        cout << endl << "Para la oferta laboral" << endl;
-                        mostrarOfertaLaboral(auxReservacion.ofertaLaboral);
-                        while(true) {
-                            aux = pedirCadena();
-                            auxReservacionOpcion = convertirEntero(aux);
+                        if(!(auxReservacion.postulante.codigo <= 0 || auxReservacion.ofertaLaboral.codigo <=0)) {
+                            cout << endl << "Entrevistando a" << endl;
+                            mostrarPostulante(auxReservacion.postulante);
+                            cout << endl << "Para la oferta laboral" << endl;
+                            mostrarOfertaLaboral(auxReservacion.ofertaLaboral);
+                            while(true) {
+                                cout << endl << "Al terminar la entrevista seleccione: ";
+                                cout << endl << "1. Es contratado" << endl << "2. No es contratado";
+                                aux = pedirCadena();
+                                auxReservacionOpcion = convertirEntero(aux);
+                                if(auxReservacionOpcion == 1) {
+                                    cout << endl << "Se contrato a " << endl;
+                                    mostrarPostulanteInline(auxReservacion.postulante);
+                                    cout << endl << "Para la oferta de "<< endl;
+                                    mostrarOfertaInline(auxReservacion.ofertaLaboral);
+                                    auxReservacion.esContratado = true;
+                                    pushStack(entrevistados, auxReservacion);
+                                    break;
+                                }else if(auxReservacionOpcion == 2) {
+                                    cout << endl << "Se decidio no contratarlo";
+                                    auxReservacion.esContratado = false;
+                                    break;
+                                }else { 
+                                    cout << endl << "Debe seleccionar una opcion valida"<<endl;
+                                    system("PAUSE");
+                                }
+                            }
+                            system("PAUSE");
+                        } else {
+                        	cout << endl;
+                            system("PAUSE");
                         }
                     }else {
                         cout << endl << "Debe ingresar una opcion valida";
                     }
                 }
 			}else if(opcion == 5) {
-            	limpiarPantalla();
-                menu(menuMostrarDatos, "MOSTRAR DATOS", menuMostrarDatosSize);
-                cout << "Ingrese una opcion: " ;
-                aux = pedirCadena();
-                opcion = convertirEntero(aux);
-                if(opcion == 1) {
-                    recorrerPostulantes(postulantes);
-                    system("PAUSE");
+            	
+                while(true) {
+                    limpiarPantalla();
+                    menu(menuMostrarDatos, "MOSTRAR DATOS", menuMostrarDatosSize);
+                    cout << "Ingrese una opcion: " ;
+                    aux = pedirCadena();
+                    subopcion = convertirEntero(aux);
+                    if(subopcion == 1) {
+                        recorrerPostulantes(postulantes);
+                        system("PAUSE");
+                    }
+                    if(subopcion == 2) {
+                        recorrerOfertas(ofertasLaborales);
+                        system("PAUSE");
+                    } 
+                    if(subopcion == 3) {
+                        mostrarEntrevistados(entrevistados);
+                        system("PAUSE");
+                    }
+                    if(subopcion == 4) {
+                        break;
+                    }
                 }
-                if(opcion == 2) {
-                    recorrerOfertas(ofertasLaborales);
-                    system("PAUSE");
-				}
 			} else if (opcion == 6) {
 				flag = false;
 			} else if(opcion == 7) {
-				
-               
                 system("PAUSE");
             }
         }else {
@@ -188,7 +222,7 @@ void recorrerOfertas(Lista<T> *& lista) {
     lista = aux;
 }
 template<typename T, typename A, typename B>
-void asociarPostulanteOferta(Cola<T> * primero, Cola<T> * ultimo, Lista<A> *&postulantes, Lista<B> *&ofertas) {
+void asociarPostulanteOferta(Cola<T> *& primero, Cola<T> *& ultimo, Lista<A> *&postulantes, Lista<B> *&ofertas) {
     Reservacion nuevo;
     Fecha fecha;
     Lista<A> *aux1 = postulantes;
@@ -271,8 +305,6 @@ void mostrarPostulanteOferta(Lista<A> *& postulantes, Lista<B> *& ofertas) {
         mostrarPostulanteInline(postulantes->dato);        
         postulantes = postulantes->siguiente;
     }
-   
-
     cout << endl << "Datos sobre las ofertas";
     while(ofertas != NULL) {
         mostrarOfertaInline(ofertas->dato);
@@ -280,4 +312,25 @@ void mostrarPostulanteOferta(Lista<A> *& postulantes, Lista<B> *& ofertas) {
     }
     postulantes = aux1;
     ofertas = aux2;
+}
+
+template <typename T>
+void mostrarEntrevistados(Pila<T> *&datos) {
+    Reservacion r;
+    Pila<T> *aux = datos;
+    while(datos != NULL) {
+        r = popStack(datos);
+        if(r.esContratado) {
+            cout << endl << "************* CONTRATADO *************" << endl; 
+        }else {
+            cout << endl << "************* NO CONTRATADO *************" << endl;
+        }
+        cout << endl << "POSTULANTE"<< endl;
+        mostrarPostulante(r.postulante);
+        cout << endl << "OFERTA" << endl;
+        mostrarOfertaLaboral(r.ofertaLaboral);
+        datos = datos->siguiente;
+    }
+
+    datos = aux;
 }
