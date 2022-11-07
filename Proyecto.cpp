@@ -38,9 +38,6 @@ void mostrarEntrevistados(Pila<T> *&);
 int main () {
 	bool flag = true, entrevistaFlag;
 	string aux;
-//	Fecha fecha1 = pedirFecha();
-//	mostrarFecha(fecha1);
-//	system("pause");
 	int opcion = 0, subopcion = 0, opcionEntrevista;
     string menuItem[] = {
         "Ingresar postulante",
